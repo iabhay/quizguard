@@ -1,0 +1,24 @@
+query_insert_user : |
+  INSERT INTO USERS (username, password, role, is_changed) VALUES (?, ?, ?, ?)
+query_create_user : |
+  CREATE TABLE IF NOT EXISTS USERS (username text, password, role text, is_changed INTEGER)
+query_select_user : |
+  SELECT * FROM USERS WHERE username=? AND password=?
+query_delete_user : |
+  DELETE FROM USERS WHERE username=? AND password=?
+query_delete_user_by_admin : |
+  DELETE FROM USERS WHERE username=?
+query_select_all_user : |
+  SELECT * FROM USERS'
+query_select_all_admin : |
+  SELECT USERS.username, SCORES.date_time, SCORES.highscore, SCORES.isLoggedIn FROM USERS INNER JOIN SCORES ON USERS.role="admin" AND USERS.username = SCORES.username
+query_update_role : |
+  UPDATE USERS SET role=? where username=?
+query_check_existence : |
+  SELECT * from USERS WHERE username=?
+query_update_pasword : |
+  UPDATE USERS SET password=? where (username=? AND password=?)
+query_update_pasword_by_admin : |
+  UPDATE USERS SET password=? WHERE username=?
+query_check_password_status : |
+  SELECT is_changed from USERS WHERE username=?

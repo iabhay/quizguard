@@ -1,0 +1,62 @@
+ENTRY_STATEMENT : |
+  QuizGuard  : Smart Quiz, Simply Played!!
+EXITING_GAME: |
+  Bye! Thanks for playing.
+MESSAGE_FOR_WRONG_INPUT : |
+  Please Select Carefully!
+ENTER_USERNAME : |
+  Enter username:
+ENTER_PASSWORD : |
+  Enter Password:
+PASSWORD_VALIDATOR_PATTERN : |
+  ^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$
+INVALID_PASSWORD : |
+  Invalid Password!!
+REGISTRATION_SUCCESS_MESSAGE : |
+  Registered successfully!!
+REGISTRATION_NOT_SUCCESSFUL : |
+  User not registered successfully.
+ALREADY_REGISTERED : |
+  Already registered!!
+  Try login!!
+INVALID_CREDENTIALS : |
+  Invalid Credentials
+LOGIN_SUCCESS_MESSAGE : |
+  Logged in Successfully.
+EXIT_LOGIN_MENU : |
+  Exiting login menu!!
+WELCOME_ADMIN: |
+  Welcome to admin Powers: -->
+WELCOME_PLAYER : |
+  Welcome to player Fun Arena -->
+WELCOME_SUPER_ADMIN : |
+  SUPER ADMIN POWERS ------------>
+GAME_STARTING : |
+  We will give you 10 Questions.
+  Here your game starts...
+HIGHSCORE_UPDATE_MESSAGE: |
+  Updated your high score.
+ROLE_CHANGED : |
+  Role changed successfully.
+ADMIN_CREATED : |
+  Admin Created Successfully.
+ENTER_PROMPT_TO_CHANGE_ROLE: |
+  Enter Username to change role:
+CONFIRMATION_PROMPT: |
+  Are you sure? (yes/no) =>
+DELETED_SUCCESSFULLY : |
+  User deleted successfully.
+QUESTION_ADDED : |
+  Question added successfully.
+QUESTION_DELETED : |
+  Question deleted successfully.
+QUESTION_UPDATED : |
+  Question updated successfully.
+QUESTION_ID_NOT_FOUND: |
+  No Such ID Found!!
+ENTER_QUESTION_ID : |
+  Enter Question ID :
+EXITING_ADMIN : |
+  Exiting Admin Menu.
+EXITING_SUPERADMIN : |
+  Exiting Super Admin Menu.

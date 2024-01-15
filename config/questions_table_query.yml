@@ -1,0 +1,16 @@
+query_create_question : |
+  CREATE TABLE IF NOT EXISTS QUESTIONSINFO(ques_id INT PRIMARY KEY AUTOINCREMENT, question text, option1 text, option2 text, option3 text, option4 text, correct text)
+query_insert_question : |
+  INSERT INTO QUESTIONSINFO (ques_id, question, option1, option2, option3, option4, correct) VALUES (?,?,?,?,?,?,?)
+query_update_question : |
+  UPDATE QUESTIONSINFO SET (question, option1, option2, option3, option4, correct) VALUES (?,?,?,?,?,?) WHERE ques_id=?
+query_delete_question : |
+  DELETE FROM QUESTIONSINFO WHERE ques_id=?
+query_select_question : |
+  SELECT question, option1, option2, option3, option4, correct FROM QUESTIONSINFO WHERE ques_id=?
+query_select_all_question : |
+  SELECT * FROM QUESTIONSINFO
+query_get_question_table_length : |
+  SELECT * FROM QUESTIONSINFO
+query_get_last_ques_id : |
+  SELECT * FROM QUESTIONSINFO ORDER BY ques_id DESC LIMIT 1

@@ -1,0 +1,57 @@
+QUIZ: "QUIZ.db"
+MAIN_PROMPT: |
+  1. : Register
+  2. : Login
+  3. : Quit
+  Enter Choice:
+ADMIN_PROMPT: |
+  1.  : Create New User
+  2.  : Delete User
+  3.  : Check User/Admin
+  4.  : Show all Users
+  5.  : Show all Admins
+  6.  : Show all LoggedIn Users
+  7.  : Show Leaderboard
+  8.  : Add Question
+  9.  : Update Question By ID
+  10. : Delete Question By ID
+  11. : Check Question
+  12. : Show all Questions
+  13. : Exit Admin Menu
+PLAYER_PROMPT: |
+  Press:
+  1 : Play Game
+  2 : My Profile
+  3 : Leaderboard
+  4 : Logout
+  Your choice:
+SUPER_ADMIN_PROMPT: |
+  1.  : Create New Admin
+  2.  : Change Admin to User
+  3.  : Delete Admin
+  4.  : Create New User
+  5.  : Change User to Admin
+  6.  : Delete User
+  7.  : Check User/Admin
+  8.  : Show all Users
+  9.  : Show all Admins
+  10. : Show all LoggedIn Users
+  11. : Show Leaderboard
+  12. : Add Question
+  13. : Update Question By ID
+  14. : Delete Question By ID
+  15. : Show Question
+  16. : Show all Questions
+  17. : Exit Admin Menu
+ADMIN_MENU_PROMPT: |
+  1. : Admin Power
+  2. : Player Fun
+  3. : Back
+  Enter choice:
+SECURE_PASSWORD_PROMPT: |
+  Your password must contain:
+  1. Minimum eight characters, 
+  2. at least one uppercase letter,
+  3. one lowercase letter and one number
+ENTER_CHOICE_PROMPT: |
+  Enter Choice:

@@ -1,0 +1,18 @@
+query_create_score : |
+   CREATE TABLE IF NOT EXISTS SCORES(date_time text, username text, highscore INT, isLoggedIn INT)
+query_insert_score : |
+   INSERT INTO SCORES(date_time, username, highscore, isLoggedIn) VALUES (?,?, ?, ?)
+query_delete_score : |
+   DELETE FROM SCORES WHERE username=?
+query_select_userscore : |
+   SELECT SCORES.date_time,SCORES.username,USERS.role,SCORES.highscore, SCORES.isLoggedIn FROM SCORES INNER JOIN USERS ON USERS.username = SCORES.username WHERE USERS.username=?
+query_leaderboard : |
+   SELECT * FROM SCORES ORDER BY highscore DESC,date_time DESC LIMIT 10
+query_update_score : |
+   UPDATE SCORES SET date_time=?, highscore=? WHERE username = ?
+query_update_login_status : |
+   UPDATE SCORES SET isLoggedIn=? WHERE username=?
+query_select_all_loggedin : |
+   SELECT * FROM SCORES WHERE isLoggedIn=?
+query_select_all_user : |
+   SELECT SCORES.date_time,SCORES.username,USERS.role,SCORES.highscore, SCORES.isLoggedIn FROM SCORES INNER JOIN USERS ON USERS.username = SCORES.username WHERE USERS.role="player"
