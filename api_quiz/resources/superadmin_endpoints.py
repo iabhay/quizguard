@@ -40,28 +40,29 @@ class SuperAdminModule(MethodView):
 
 
 
+@blp.route("/admin/to_user/<string:username>")
+class AdminUser(MethodView):
+    @role_required(["hanuman"])
+    @jwt_required()
+    def post(username):
+        super_admin_obj = SuperAdminController()
+        res = super_admin_obj.change_admin_to_user(username)
+        if res is None:
+            abort(400, message="Role Changing not possible.")
+        return {
+            "message": "Role Changing successful."
+        }
 
-@blp.route("/admin/to_user/<string:username>", methods=["POST"])
-@role_required(["hanuman"])
-@jwt_required()
-def admin_to_user(username):
-    super_admin_obj = SuperAdminController()
-    res = super_admin_obj.change_admin_to_user(username)
-    if res is None:
-        abort(400, message="Role Changing not possible.")
-    return {
-        "message": "Role Changing successful."
-    }
 
-
-@blp.route("/user/to_admin/<string:username>", methods=["POST"])
-@role_required(["hanuman"])
-@jwt_required()
-def user_to_admin(username):
-    super_admin_obj = SuperAdminController()
-    res = super_admin_obj.change_user_to_admin(username)
-    if res is None:
-        abort(400, message="Role Changing not possible.")
-    return {
-        "message": "Role Changing successful."
-    }
+@blp.route("/user/to_admin/<string:username>")
+class UserAdmin(MethodView):
+    @role_required(["hanuman"])
+    @jwt_required()
+    def post(username):
+        super_admin_obj = SuperAdminController()
+        res = super_admin_obj.change_user_to_admin(username)
+        if res is None:
+            abort(400, message="Role Changing not possible.")
+        return {
+            "message": "Role Changing successful."
+        }
