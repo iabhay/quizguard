@@ -14,7 +14,5 @@ def role_required(role_list: list):
                 return fn(*args, **kwargs)
             else:
                 abort(403, message="Permission not granted!")
-
         return decorator
-
     return wrapper

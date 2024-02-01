@@ -15,8 +15,8 @@ class AdminController(User):
             super().__init__()
             self.ques = Question()
 
-    # def add_user(self, role="player", is_Changed=1):
-    #     User.add_user(role="player", is_changed=0)
+    def add_user(self, role="player", is_Changed=1):
+        User.add_user(role="player", is_changed=0)
 
     def update_user_password(self):
         username = input("Enter Username: ")

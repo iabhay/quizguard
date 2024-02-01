@@ -30,7 +30,6 @@ class ScoresDB:
             cursor = connection.cursor()
             table = cursor.execute(ScoresTableQuery.query_leaderboard).fetchall()
             cursor.close()
-            print(tabulate(table))
             return table
 
     def show_player_score(self, username):
@@ -41,17 +40,20 @@ class ScoresDB:
             if not player_score:
                 print(f"No such user found!!")
                 return None
-            return {"Last Played": player_score[0],
+            response = {"Last Played": player_score[0],
                     "User": player_score[1],
                     "Role": player_score[2],
                     "Highscore":player_score[3],
                     "Login Status": 'Active' if player_score[4] == 1 else 'Not-Active'}
+            return response
 
     def fetch_player_score(self, username):
         with DatabaseConnection(QUIZ) as connection:
             cursor = connection.cursor()
             player_score = cursor.execute(ScoresTableQuery.query_fetch_score, (username, )).fetchone()
             cursor.close()
+            if player_score is None:
+                return 0
             return player_score[0]
 
     def mark_login(self, username):

@@ -46,4 +46,4 @@ class QUESTIONSTableQuery:
     query_select_all_question = 'SELECT * FROM QUESTIONSINFO'
     query_get_question_table_length = 'SELECT * FROM QUESTIONSINFO'
     query_get_last_ques_id = 'SELECT * FROM QUESTIONSINFO ORDER BY ques_id DESC LIMIT 1'
-    query_get_one_question = 'SELECT * FROM QUESTIONSINFO LIMIT 1 OFFSET ABS(RANDOM()) % MAX(( SELECT COUNT(*) FROM QUESTIONSINFO), 1)'
+    query_get_one_question = 'SELECT * FROM QUESTIONSINFO LIMIT 10 OFFSET ABS(RANDOM()) % MAX(( SELECT COUNT(*) FROM QUESTIONSINFO), 1)'

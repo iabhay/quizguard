@@ -21,10 +21,10 @@ class UsersDB:
             with DatabaseConnection(QUIZ) as connection:
                 cursor = connection.cursor()
                 cursor.execute(UsersTableQuery.query_insert_user, (username, password, role, is_changed))
-                cursor.close()
                 tm = datetime.now()
                 dt_string = tm.strftime("%d/%m/%Y %H:%M:%S")
                 cursor.execute(ScoresTableQuery.query_insert_score, (dt_string, username, 0, 0))
+                cursor.close()
                 return True
         except:
             return False

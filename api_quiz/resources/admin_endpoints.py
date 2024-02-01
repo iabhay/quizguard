@@ -15,6 +15,7 @@ class AdminModule(MethodView):
 
     @role_required(["batman", "hanuman"])
     @jwt_required()
+    @blp.doc(params={"role": "Role"})
     @blp.arguments(UserSchema)
     def post(self, user_data):
         res = self.user.add_user(username=user_data["username"], password=user_data["password"])

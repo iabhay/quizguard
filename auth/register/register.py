@@ -15,13 +15,11 @@ class Register:
     def register_module(self, username, password, role="player"):
         if not self.check_registration(username):
             if not password_validation(password):
-                print("Invalid Password!!")
                 return False
             else:
                 hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
                 try:
                     self.user.create_user(username, hashed_password, role)
-                    print("Registered successfully!!")
                     return True
                 except Exception:
                     print(Exception.__name__)
@@ -33,7 +31,6 @@ class Register:
         try:
             is_already_registered = self.user.check_user(name)
             if is_already_registered:
-                print("Already registered!!\nTry login!!")
                 return True
             else:
                 return False

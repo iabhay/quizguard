@@ -25,13 +25,25 @@ class QuizLix:
             print("Bye! Thanks for playing.")
         while 0 < ask < 3:
             if ask == 1:
-                print(Config.ENTER_USERNAME_PROMPT)
+                # print(Config.ENTER_USERNAME_PROMPT)
                 username = input("Enter username: ")
                 print(Config.SECURE_PASSWORD_PROMPT)
                 password = pwinput("Enter Password: ", mask="*")
-                self.register.register_module(username=username, password=password)
+                response = self.register.register_module(username=username, password=password)
+                if response == False:
+                    print("Invalid Password!!")
+                elif response is None:
+                    print("Already registered!!\nTry login!!")
+                elif response == True:
+                    print("Registered successfully!!")
             elif ask == 2:
-                self.login.loginmodule()
+                # print(Config.ENTER_USERNAME_PROMPT)
+                username = input("Enter username: ")
+                print(Config.SECURE_PASSWORD_PROMPT)
+                password = pwinput("Enter Password: ", mask="*")
+                response = self.login.loginmodule(username, password)
+                if response is None:
+                    print("Invalid Credentials!!")
             else:
                 print("Please Select Carefully!")
             ask = int(input(Config.MAIN_PROMPT))
@@ -40,7 +52,6 @@ class QuizLix:
 
 
 if __name__ == "__main__":
-    Config = Config.load()
     app = Flask(__name__)
     app.config["API_TITLE"] = "Quiz Guard"
     app.config["API_VERSION"] = "v1"
@@ -49,6 +60,7 @@ if __name__ == "__main__":
     app.config["OPENAPI_SWAGGER_UI_PATH"] = "/swagger-ui"
     app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
     api = Api(app)
+    
     app.config["JWT_SECRET_KEY"] = "abhay"
     jwt = JWTManager(app)
     api.register_blueprint(register_blp)
@@ -59,5 +71,5 @@ if __name__ == "__main__":
     api.register_blueprint(superadmin_blp)
     app.run(debug=True, port=5000)
     Config.load()
-    # quiz_obj = QuizLix()
-    # quiz_obj.menu()
+    quiz_obj = QuizLix()
+    quiz_obj.menu()

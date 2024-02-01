@@ -1,7 +1,12 @@
-Flask-JWT-Extended
-Flask-Smorest
-Flask-SQLAlchemy
+flask-jwt-extended
+flask-smorest
+flask-sqlalchemy
 passlib
 marshmallow
 python-dotenv
 gunicorn
+requests
+python-dotenv
+sqlalchemy
+rq
+redis

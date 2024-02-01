@@ -1,5 +1,5 @@
 import yaml
-
+# C:\Users\aagrawal\Desktop\quizguard\config\config.yml
 FPATH = 'config/config.yml'
 GENERALCONFIGPATH = 'config/general_config.yml'
 QUESTIONSQUERYPATH = 'config/questions_table_query.yml'
@@ -22,6 +22,7 @@ class Config:
     EXITING_GAME: None
     MESSAGE_FOR_WRONG_INPUT: None
     ENTER_USERNAME: None
+    # ENTER_USERNAME_PROMPT: None
     ENTER_PASSWORD: None
     PASSWORD_VALIDATOR_PATTERN: None
     INVALID_PASSWORD: None
@@ -95,7 +96,8 @@ class Config:
             cls.ENTRY_STATEMENT = data['ENTRY_STATEMENT']
             cls.EXITING_GAME = data['EXITING_GAME']
             cls.MESSAGE_FOR_WRONG_INPUT = data['MESSAGE_FOR_WRONG_INPUT']
-            cls.ENTER_USERNAME = data['MESSAGE_FOR_WRONG_INPUT']
+            cls.ENTER_USERNAME = data['ENTER_USERNAME']
+            # cls.ENTER_USERNAME = data['ENTER_USERNAME_PROMPT']
             cls.ENTER_PASSWORD = data['ENTER_PASSWORD']
             cls.PASSWORD_VALIDATOR_PATTERN = data['PASSWORD_VALIDATOR_PATTERN']
             cls.INVALID_PASSWORD = data['INVALID_PASSWORD']

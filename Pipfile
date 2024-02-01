@@ -9,6 +9,11 @@ tabulate = "*"
 yml = "*"
 pyyaml = "*"
 random-password-generator = "*"
+requests = "*"
+rq = "*"
+fastapi = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+python-jose = {extras = ["cryptography"], version = "*"}
 
 [dev-packages]
 

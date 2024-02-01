@@ -50,7 +50,7 @@ class QuestionsDB:
     def get_question(self):
         with DatabaseConnection(QUIZ) as connection:
             cursor = connection.cursor()
-            ques = cursor.execute(QUESTIONSTableQuery.query_get_one_question).fetchone()
+            ques = cursor.execute(QUESTIONSTableQuery.query_get_one_question).fetchall()
             cursor.close()
             return ques
 

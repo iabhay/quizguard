@@ -10,19 +10,17 @@ class PlayerController:
         self.ques = QuestionsDB()
 
     def playgame(self, username):
-        print("We will give you 10 Questions.")
-        print("Here your game starts...")
-        userscore = 0
-        for i in range(0, 10):
-            userscore += self.question()
-        print(f"You scored {userscore} out of 10.")
-        self.highscorer(username, userscore)
+        user_score = 0
+        content = self.ques.get_question()
+        for curr_content in content:
+            user_score += self.question(curr_content)
+        self.highscorer(username, user_score)
+        return user_score
 
     def highscorer(self, name, score):
         entry = self.score.fetch_player_score(name)
         if entry < score:
             self.score.update_player_score(name, score)
-            print("Updated your high score.")
 
     def highscoreinfo(self, name):
         return self.score.show_player_score(name)
@@ -30,11 +28,7 @@ class PlayerController:
     def leaderboard(self):
         return self.score.show_leaderboard()
 
-    def question(self):
-        current_score = 0
-        curr_content = self.ques.get_question()
-        print(f"Question: {curr_content[1]}")
-        print(f"Options: ")
+    def question(self, curr_content):
         my_options = [curr_content[2], curr_content[3], curr_content[4], curr_content[5]]
         correct_option_ind = curr_content[6]
         option_dict = {
@@ -45,13 +39,18 @@ class PlayerController:
         }
         correct_option = curr_content[option_dict[correct_option_ind]]
         random.shuffle(my_options)
+        current_score = self.show_question(curr_content[1], my_options, correct_option)
+        return current_score
+
+    def show_question(self, question, options, correct_option):
+        print(f"Question: {question}")
+        print(f"Options: ")
         for i in range(0, 4):
-            print(f"{i + 1}. {my_options[i]}")
+            print(f"{i + 1}. {options[i]}")
         ask_option = int(input("Write correct option (1,2,3,4) : "))
         while ask_option <= 0 or ask_option >= 5:
             print("Please Select Carefully.")
             ask_option = int(input("Write correct option (1,2,3,4) : "))
-        if my_options[ask_option-1] == correct_option:
-            current_score += 1
-        return current_score
-
+        if options[ask_option-1] == correct_option:
+            return 1
+        return 0
