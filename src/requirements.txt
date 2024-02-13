@@ -10,4 +10,5 @@ requests
 python-dotenv
 sqlalchemy
 rq
+fastapi
 redis
