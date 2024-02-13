@@ -1,6 +1,5 @@
 from controllers.player_controller import PlayerController
 from config.config import Config
-from tabulate import tabulate
 class Player:
     def __init__(self):
        self.player_controller = PlayerController()
@@ -19,7 +18,6 @@ class Player:
                 self.view_hishscore(resp)
             elif ask == 3:
                 resp = self.player_controller.leaderboard()
-                print(tabulate(resp))
             else:
                 print("Please Select Carefully!")
             ask = int(input(Config.PLAYER_PROMPT))

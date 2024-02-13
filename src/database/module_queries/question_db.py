@@ -1,4 +1,3 @@
-from tabulate import tabulate
 from database.databaseconnection import DatabaseConnection
 from database.database_query import UsersTableQuery, ScoresTableQuery, QUESTIONSTableQuery, DatabasePath
 

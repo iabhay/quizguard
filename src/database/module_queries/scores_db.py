@@ -1,5 +1,4 @@
 from datetime import datetime
-from tabulate import tabulate
 from database.databaseconnection import DatabaseConnection
 from database.database_query import UsersTableQuery, ScoresTableQuery, QUESTIONSTableQuery, DatabasePath
 from utils.Exception_Handler.sql_exception_handler import exception_handler
