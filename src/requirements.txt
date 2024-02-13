@@ -13,3 +13,4 @@ rq
 fastapi
 redis
 pwinput
+python-jose[cryptography]
