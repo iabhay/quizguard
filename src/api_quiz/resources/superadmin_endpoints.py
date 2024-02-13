@@ -11,13 +11,13 @@ router = APIRouter()
 @role_required(["hanuman"])
 def super_admin_module(token: token_dependency, admin_data=Body()):
     super_admin_obj = SuperAdminController()
-    res = super_admin_obj.create_new_admin(admin_data["username"], admin_data["password"])
+    res = super_admin_obj.create_new_admin(admin_data['username'], admin_data['password'])
     if res is None:
         raise HTTPException(409, detail="User already exist")
     if res is False:
         raise HTTPException(400, detail="Validation failed.")
     return {
-        "username": admin_data["username"],
+        "username": admin_data['username'],
         "message": "Admin added successfully."
     }
 
@@ -25,7 +25,7 @@ def super_admin_module(token: token_dependency, admin_data=Body()):
 @role_required(["hanuman"])
 def delete_admin(token: token_dependency, admin_data=Body()):
     super_admin_obj = SuperAdminController()
-    res = super_admin_obj.delete_admin(admin_data["username"])
+    res = super_admin_obj.delete_admin(admin_data['username'])
     return res
 
 @router.put("/admin-to-user/{username}", status_code=status.HTTP_200_OK)

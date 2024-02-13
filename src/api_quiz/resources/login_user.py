@@ -16,7 +16,7 @@ ALGORITHM = os.getenv('ALGORITHM')
 def login_user(user_data=Body()):
     """Login a new user"""
     login_obj = Login()
-    res = login_obj.loginmodule(user_data["username"], user_data["password"])
+    res = login_obj.loginmodule(user_data['username'], user_data['password'])
     if res is None:
         raise HTTPException(404, detail="User not registered")
     else:
@@ -27,8 +27,10 @@ def login_user(user_data=Body()):
         elif res[2] == "player":
             res = "spiderman"
         token = create_access_token(res, user_data["username"], timedelta(minutes=15))
-        return {"token": token,
-                "message": f"{user_data["username"]} logged in successfully as {res}"}
+        return {
+                "token": token,
+                "message": f"{user_data['username']} logged in successfully as {res}"
+                }
 
 def create_access_token(role: str, user_id: str, expires_delta: timedelta):
     encode = {'sub': role, 'id': user_id}

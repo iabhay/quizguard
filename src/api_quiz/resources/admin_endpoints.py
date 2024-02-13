@@ -37,13 +37,13 @@ def view_all_logged_in(token: token_dependency):
 @role_required(["batman", "hanuman"])
 def add_user(token: token_dependency, user_data=Body()):
     user = User()
-    res = user.add_user(username=user_data["username"], password=user_data["password"])
+    res = user.add_user(username=user_data['username'], password=user_data['password'])
     if res is False:
         raise HTTPException(400, detail="Invalid Details!")
     elif res is None:
         raise HTTPException(409, detail="User already Exists.")
     return {
-        "username": user_data["username"],
+        "username": user_data['username'],
         "message": "User Added Successfully."
     }
 
@@ -54,7 +54,7 @@ def add_user(token: token_dependency, user_data=Body()):
 @role_required(["batman", "hanuman"])
 def delete_user(token: token_dependency, user_data=Body()):
     userdb = UsersDB()
-    res = userdb.delete_user_by_admin(user_data["username"])
+    res = userdb.delete_user_by_admin(user_data['username'])
     if res is False:
         raise HTTPException(500, detail="User Not deleted.")
     return {

@@ -12,7 +12,7 @@ router = APIRouter()
 def question_module(token: token_dependency, ques_data=Body(), id=Path()):
     ques = QuestionsDB()
     if int(id) >0:
-        res = ques.update_question(ques_data["question"], ques_data["option1"], ques_data["option2"], ques_data["option3"], ques_data["option4"], ques_data["correct"], id)
+        res = ques.update_question(ques_data['question'], ques_data['option1'], ques_data['option2'], ques_data['option3'], ques_data['option4'], ques_data['correct'], id)
         if res:
             return {
                 "message": "Successfully updated!"
@@ -20,17 +20,17 @@ def question_module(token: token_dependency, ques_data=Body(), id=Path()):
         raise HTTPException(404, detail="No Such question exist with this id.")
     elif int(id) == 0:
         i = ques.get_last_id()
-        res = ques.add_question(i, ques_data["question"], ques_data["option1"], ques_data["option2"], ques_data["option3"], ques_data["option4"], ques_data["correct"])
+        res = ques.add_question(i, ques_data['question'], ques_data['option1'], ques_data['option2'], ques_data['option3'], ques_data['option4'], ques_data['correct'])
         if res is False:
             raise HTTPException(400, detail="Question not added successfully.")
         return {
             "question_id": i,
-            "question": ques_data["question"],
-            "option1": ques_data["option1"],
-            "option2": ques_data["option2"],
-            "option3": ques_data["option3"],
-            "option4": ques_data["option4"],
-            "correct": ques_data["correct"],
+            "question": ques_data['question'],
+            "option1": ques_data['option1'],
+            "option2": ques_data['option2'],
+            "option3": ques_data['option3'],
+            "option4": ques_data['option4'],
+            "correct": ques_data['correct'],
             "message": "Question added Successfully."
         }
     else:
