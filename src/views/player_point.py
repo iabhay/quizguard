@@ -32,4 +32,4 @@ class Player:
         print(f"You scored {user_score} out of 10.")
 
     def view_hishscore(self, resp):
-        print(f"Last Played: {resp["Last Played"]}\nUser: {resp["User"]}\nRole: {resp["Role"]}\nHighscore: {resp["Highscore"]}\nLogin Status: {'Active' if resp["Login Status"] == 1 else 'Not-Active'}")
+        print(f"Last Played: {resp['Last Played']}\nUser: {resp['User']}\nRole: {resp['Role']}\nHighscore: {resp['Highscore']}\nLogin Status: {'Active' if resp['Login Status'] == 1 else 'Not-Active'}")

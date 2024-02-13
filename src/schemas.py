@@ -2,7 +2,7 @@ from marshmallow import Schema, fields, validate
 
 class UserSchema(Schema):
     username = fields.Str(required=True)
-    password = fields.Str(required=True, validate=validate.Regexp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$"))
+    password = fields.Str(required=True, validate=validate.Regexp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$'))
 
 class PlayerSchema(Schema):
     last_played = fields.Str(dump_only=True)

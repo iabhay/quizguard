@@ -1,6 +1,4 @@
 from controllers.admincontroller import AdminController
-from controllers.usercontroller import User
-from controllers.questioncontroller import Question
 from config.config import Config
 
 class Admin:
