@@ -12,3 +12,4 @@ sqlalchemy
 rq
 fastapi
 redis
+pwinput
