@@ -1,9 +1,7 @@
 from datetime import datetime
-from tabulate import tabulate
 from database.databaseconnection import DatabaseConnection
 from database.database_query import UsersTableQuery, ScoresTableQuery, QUESTIONSTableQuery, DatabasePath
-from utils.Exception_Handler.sql_exception_handler import exception_handler
-from config.config import Config
+from fastapi import HTTPException
 
 class UsersDB:
 
@@ -38,25 +36,22 @@ class UsersDB:
 
 
     def delete_user_by_admin(self, username):
-        #check if admin
-        try:
-            with DatabaseConnection(DatabasePath.MY_SQL_PATH) as connection:
-                cursor = connection.cursor()
-                is_exist = cursor.execute(UsersTableQuery.query_select_user_by_admin, (username, )).fetchone()
-                if is_exist:
-                    return None
-                cursor.execute(UsersTableQuery.query_delete_user_by_admin, (username,))
-                cursor.execute(ScoresTableQuery.query_delete_score, (username,))
-                cursor.close()
-                return True
-        except:
-            return False
+        with DatabaseConnection(DatabasePath.MY_SQL_PATH) as connection:
+            cursor = connection.cursor()
+            is_exist = cursor.execute(UsersTableQuery.query_select_user_by_admin, (username, )).fetchone()
+            if not is_exist:
+                raise HTTPException(404, detail="User not exist")
+            if is_exist[2] == "admin" or is_exist[2] == "superadmin":
+                raise HTTPException(403, detail="User can't be deleted")
+            cursor.execute(UsersTableQuery.query_delete_user_by_admin, (username,))
+            cursor.execute(ScoresTableQuery.query_delete_score, (username,))
+            cursor.close()
+            return True
 
     def read_all_admin(self):
         with DatabaseConnection(DatabasePath.MY_SQL_PATH) as connection:
             cursor = connection.cursor()
             table = cursor.execute(UsersTableQuery.query_select_all_admin).fetchall()
-            print(tabulate(table))
             cursor.close()
             return table
 
@@ -78,7 +73,7 @@ class UsersDB:
     def check_user(self, username):
         with DatabaseConnection(DatabasePath.MY_SQL_PATH) as connection:
             cursor = connection.cursor()
-            count = cursor.execute(UsersTableQuery.query_check_existence, (username, )).fetchone()
+            count = cursor.execute(UsersTableQuery.query_check_existence, (username, )).fetchall()
             cursor.close()
             if not count:
                 return False
@@ -112,10 +107,14 @@ class UsersDB:
         with DatabaseConnection(DatabasePath.MY_SQL_PATH) as connection:
             cursor = connection.cursor()
             try:
-                cursor.execute(UsersTableQuery.query_delete_admin, (username,))
-                cursor.execute(ScoresTableQuery.query_delete_score, (username,))
-                print("Admin deleted!!")
+                entry = cursor.execute(UsersTableQuery.query_select_user_by_admin, (username, )).fetchone()
+                if entry[2] == "admin" or entry[2] == "superadmin":
+                    cursor.execute(UsersTableQuery.query_delete_admin, (username,))
+                    cursor.execute(ScoresTableQuery.query_delete_score, (username,))
+                    return True
+                else:
+                    return False
             except:
-                print("ADMIN DELETION FAILED!!")
+                return None
 
 

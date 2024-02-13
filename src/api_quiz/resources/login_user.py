@@ -18,7 +18,7 @@ def login_user(user_data=Body()):
     login_obj = Login()
     res = login_obj.loginmodule(user_data["username"], user_data["password"])
     if res is None:
-        raise HTTPException(400, detail="User not registered")
+        raise HTTPException(404, detail="User not registered")
     else:
         if res[2] == "admin":
             res =  "batman"

@@ -7,9 +7,10 @@ router = APIRouter()
 def register_user(user_data=Body()):
     """Register a new user"""
     reg = Register()
-    if reg.register_module(user_data["username"], user_data["password"]) is None:
-        raise HTTPException(400, detail="User already registered")
-    elif reg.register_module(user_data["username"], user_data["password"]) is False:
+    res = reg.register_module(user_data["username"], user_data["password"])
+    if res is None:
+        raise HTTPException(409, detail="User already registered")
+    elif res is False:
         raise HTTPException(400, detail="Invalid password")
     else:
         return {

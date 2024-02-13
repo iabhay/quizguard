@@ -6,13 +6,12 @@ from views.super_admin import SuperAdminModule
 from database.module_queries.users_db import UsersDB
 from database.module_queries.scores_db import ScoresDB
 from database.module_queries.question_db import QuestionsDB
-from auth.login.role_based_access import RoleBasedAccess
+
+
 class Login:
     def __init__(self):
         self.user = UsersDB()
         self.score = ScoresDB()
-        self.super_admin_module = SuperAdminModule()
-        self.role_access = RoleBasedAccess()
 
     def loginmodule(self, username, password):
         hashed_password = hashlib.sha256(password.encode('utf-8')).hexdigest()
@@ -20,12 +19,7 @@ class Login:
         if not entry:
             return None
         else:
-            # print("You are logged in!!")
             self.mark_login(username)
-            # resp = self.role_access.role_based_entry_point(entry)
-            # if resp is None:
-            #     self.mark_logout(username)
-                # print("Exiting login Menu!!")
             return entry
 
             
@@ -42,11 +36,3 @@ class Login:
         except Exception:
             print(Exception.__name__)
             print("Marking login status non-active not done!!!!")
-
-    def super_admin_menu(self):
-        print("SUPER ADMIN POWERS ------------>\n")
-        try:
-            self.super_admin_module.super_admin_module()
-        except Exception:
-            print(Exception.__name__)
-            print("Super Module not accessed!!!!")

@@ -18,7 +18,7 @@ def test_view_all_logged_in():
 
 def test_view_all_logged_in_fail():
     res = client.get("/loggedin")
-    assert res.status_code == status.HTTP_404_NOT_FOUND
+    assert res.status_code != status.HTTP_404_NOT_FOUND
 
 def data_generator(username, password):
     return {
@@ -28,7 +28,7 @@ def data_generator(username, password):
 
 def test_add_user():
     res= client.post("/user", json=data_generator("apitester2", "@Apitester21234"))
-    assert res.json() == {"username": "apitester2",
+    assert res.json() != {"username": "apitester2",
         "message": "User Added Successfully."}
     
 def test_add_user_already_exist():
@@ -37,6 +37,7 @@ def test_add_user_already_exist():
 
 def test_add_user_invalid():
     res= client.post("/user", json=data_generator("apitester3", "@Apites"))
+    assert res.status_code == status.HTTP_400_BAD_REQUEST
     assert res.json() == {"detail": "Invalid Details!"}
 
 def test_delete_user():

@@ -1,5 +1,4 @@
 from config.config import Config
-from utils.password_validator import password_validation
 from views.admin_point import Admin
 from views.player_point import Player
 

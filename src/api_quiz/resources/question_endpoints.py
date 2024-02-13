@@ -11,27 +11,30 @@ router = APIRouter()
 @role_required(["batman", "hanuman"])
 def question_module(token: token_dependency, ques_data=Body(), id=Path()):
     ques = QuestionsDB()
-    if int(id) > 0:
+    if int(id) >0:
         res = ques.update_question(ques_data["question"], ques_data["option1"], ques_data["option2"], ques_data["option3"], ques_data["option4"], ques_data["correct"], id)
         if res:
             return {
                 "message": "Successfully updated!"
             }
-        raise HTTPException(400, detail="No Such question exist with this id.")
-    i = ques.get_last_id()
-    res = ques.add_question(i, ques_data["question"], ques_data["option1"], ques_data["option2"], ques_data["option3"], ques_data["option4"], ques_data["correct"])
-    if res is False:
-        raise HTTPException(400, detail="Question not added successfully.")
-    return {
-        "question_id": i,
-        "question": ques_data["question"],
-        "option1": ques_data["option1"],
-        "option2": ques_data["option2"],
-        "option3": ques_data["option3"],
-        "option4": ques_data["option4"],
-        "correct": ques_data["correct"],
-        "message": "Question added Successfully."
-    }
+        raise HTTPException(404, detail="No Such question exist with this id.")
+    elif int(id) == 0:
+        i = ques.get_last_id()
+        res = ques.add_question(i, ques_data["question"], ques_data["option1"], ques_data["option2"], ques_data["option3"], ques_data["option4"], ques_data["correct"])
+        if res is False:
+            raise HTTPException(400, detail="Question not added successfully.")
+        return {
+            "question_id": i,
+            "question": ques_data["question"],
+            "option1": ques_data["option1"],
+            "option2": ques_data["option2"],
+            "option3": ques_data["option3"],
+            "option4": ques_data["option4"],
+            "correct": ques_data["correct"],
+            "message": "Question added Successfully."
+        }
+    else:
+        raise HTTPException(422, detail="Invalid Field")
 
 @router.get("/question/{id}", status_code=status.HTTP_200_OK)
 @role_required(["batman", "hanuman"])
@@ -51,7 +54,7 @@ def view_question(token: token_dependency, id=Path()):
                 "correct": tup[6]
                 }
             return curr
-        raise HTTPException(400, detail="No Question available for this id.")
+        raise HTTPException(404, detail="No Question available for this id.")
 
 @router.get("/questions", status_code=status.HTTP_200_OK)
 @role_required(["batman", "hanuman"])
@@ -85,5 +88,6 @@ def delete_question(token: token_dependency, id=Path()):
             return {
                 "message": "Successfully deleted."
             }
-        raise HTTPException(400, detail="No such Question with this id is available.")
+        elif res is None:
+            raise HTTPException(404, detail="No such Question with this id is available.")
     raise HTTPException(400, detail="ID NOT PROVIDED!!")

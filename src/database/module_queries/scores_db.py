@@ -35,7 +35,6 @@ class ScoresDB:
             player_score = cursor.execute(ScoresTableQuery.query_select_userscore, (username, )).fetchone()
             cursor.close()
             if not player_score:
-                print(f"No such user found!!")
                 return None
             response = {"Last Played": player_score[0],
                     "User": player_score[1],
@@ -79,7 +78,6 @@ class ScoresDB:
             cursor = connection.cursor()
             table = cursor.execute(ScoresTableQuery.query_select_all_user).fetchall()
             cursor.close()
-            print(tabulate(table))
             return table
 
 

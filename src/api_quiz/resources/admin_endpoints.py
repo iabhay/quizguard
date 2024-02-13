@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Body, Path, Depends
+from fastapi import APIRouter, HTTPException, Body, Depends
 from starlette import status
 from fastapi.security import OAuth2PasswordBearer
 from typing import Annotated
@@ -19,7 +19,7 @@ def view_all_logged_in(token: token_dependency):
     adm = AdminController()
     res = adm.show_all_loggedin()
     if res is None:
-        raise HTTPException(404, detail="No Content Found")
+        raise HTTPException(404, detail="Data Not Found")
     response = {}
     id = 1
     for tup in res:
@@ -41,7 +41,7 @@ def add_user(token: token_dependency, user_data=Body()):
     if res is False:
         raise HTTPException(400, detail="Invalid Details!")
     elif res is None:
-        raise HTTPException(400, detail="User already Exists.")
+        raise HTTPException(409, detail="User already Exists.")
     return {
         "username": user_data["username"],
         "message": "User Added Successfully."
@@ -56,7 +56,7 @@ def delete_user(token: token_dependency, user_data=Body()):
     userdb = UsersDB()
     res = userdb.delete_user_by_admin(user_data["username"])
     if res is False:
-        raise HTTPException(400, detail="User Not deleted.")
+        raise HTTPException(500, detail="User Not deleted.")
     return {
         "message": "User deleted Successfully."
     }

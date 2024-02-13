@@ -1,10 +1,10 @@
 import yaml
-# C:\Users\aagrawal\Desktop\quizguard\config\config.yml
-FPATH = 'src/config/config.yml'
-GENERALCONFIGPATH = 'src/config/general_config.yml'
-QUESTIONSQUERYPATH = 'src/config/questions_table_query.yml'
-SCORESQUERYPATH = 'src/config/scores_table_query.yml'
-USERSQUERYPATH = 'src/config/users_table_query.yml'
+
+FPATH = 'config/config.yml'
+GENERALCONFIGPATH = 'config/general_config.yml'
+QUESTIONSQUERYPATH = 'config/questions_table_query.yml'
+SCORESQUERYPATH = 'config/scores_table_query.yml'
+USERSQUERYPATH = 'config/users_table_query.yml'
 
 class Config:
     """

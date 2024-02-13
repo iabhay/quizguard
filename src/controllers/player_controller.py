@@ -43,13 +43,8 @@ class PlayerController:
         return current_score
 
     def show_question(self, question, options, correct_option):
-        print(f"Question: {question}")
-        print(f"Options: ")
-        for i in range(0, 4):
-            print(f"{i + 1}. {options[i]}")
         ask_option = int(input("Write correct option (1,2,3,4) : "))
         while ask_option <= 0 or ask_option >= 5:
-            print("Please Select Carefully.")
             ask_option = int(input("Write correct option (1,2,3,4) : "))
         if options[ask_option-1] == correct_option:
             return 1

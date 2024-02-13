@@ -1,6 +1,4 @@
 from pwinput import pwinput
-
-import views.admin_point
 from controllers.questioncontroller import Question
 from database.module_queries.users_db import UsersDB
 from database.module_queries.question_db import QuestionsDB
@@ -41,8 +39,8 @@ class AdminController(User):
             ques_id = int(input(f"Enter Question ID to show details: "))
             self.ques.show_question_by_id(ques_id)
         except Exception:
-            print(Exception.__name__)
-            print("Show Question from admin failed!!")
+            return None
+        
     def show_all_questions(self):
         self.ques.show_all_questions()
 

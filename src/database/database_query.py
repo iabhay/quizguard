@@ -18,7 +18,7 @@ class UsersTableQuery:
     query_update_pasword = 'UPDATE USERS SET password=? where (username=? AND password=?)'
     query_update_pasword_by_admin = 'UPDATE USERS SET password=? WHERE username=?'
     query_check_password_status = 'SELECT is_changed from USERS WHERE username=?'
-    query_delete_admin = 'DELETE FROM USERS WHERE username = ?'
+    query_delete_admin = 'DELETE FROM USERS WHERE username=? AND role="admin"'
     
 
 class ScoresTableQuery:
